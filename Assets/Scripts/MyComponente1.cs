@@ -26,8 +26,7 @@ public class MyComponente : MonoBehaviour
     /// </summary>
     void Awake()
     {
-        Debug.Log("Este es AWAKE");
-        
+        Debug.Log("Este es AWAKE");        
         GOTransform = miGameobject.GetComponent<Transform>();
         Debug.Log("Transform = "+GOTransform.position);
     }
@@ -56,24 +55,20 @@ public class MyComponente : MonoBehaviour
         Debug.Log("mi escenario es " + escenario.name);
         entero += 1;
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             Debug.Log("presione A");
+            vectorMovement = new Vector3(GOTransform.position.x,GOTransform.position.y,GOTransform.position.z + speed);
+            GOTransform.position = vectorMovement;
         }
-        
-        
+
+
 
         ///
         // nuevo vector 3 publico
         //update le sumen +0.1f  a eje Z 
-       // vectorMovement = new Vector3(GOTransform.position.x,GOTransform.position.y,GOTransform.position.z + speed);
-
-       // vectorScala = new Vector3(GOTransform.localScale.x+scale , GOTransform.localScale.y+scale, GOTransform.localScale.z+scale);
 
 
-       // GOTransform.position = vectorMovement;
-       // GOTransform.localScale = vectorScala;
-        
 
     }
     /// <summary>
