@@ -20,18 +20,22 @@ public class CubeComponent : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
+            Debug.Log("Press W");
             miTransform.position = new Vector3(miTransform.position.x , miTransform.position.y, miTransform.position.z + speed );
         }
         if (Input.GetKey(KeyCode.S))
         {
+             Debug.Log("Press S");
             miTransform.position = new Vector3(miTransform.position.x , miTransform.position.y, miTransform.position.z - speed );
         }
         if (Input.GetKey(KeyCode.A))
         {
+             Debug.Log("Press A");
             miTransform.position = new Vector3(miTransform.position.x - speed , miTransform.position.y, miTransform.position.z );
         } 
         if (Input.GetKey(KeyCode.D))
         {
+             Debug.Log("Press D");
             miTransform.position = new Vector3(miTransform.position.x + speed , miTransform.position.y, miTransform.position.z );
         }
 
