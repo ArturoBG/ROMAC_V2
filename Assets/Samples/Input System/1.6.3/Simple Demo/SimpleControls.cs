@@ -59,7 +59,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""abb776f3-f329-4f7b-bbf8-b577d13be018"",
-                    ""path"": ""*/{PrimaryAction}"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -156,6 +156,34 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""onHorse"",
+            ""id"": ""8fcf6ae1-5fd6-478d-a72c-e1bed97c5c14"",
+            ""actions"": [
+                {
+                    ""name"": ""ride"",
+                    ""type"": ""Button"",
+                    ""id"": ""c631edb3-3f45-4874-a27e-5924c5385e6e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b1355aae-607e-470f-a8a0-0a1dc8686ca2"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ride"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -165,6 +193,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         m_gameplay_fire = m_gameplay.FindAction("fire", throwIfNotFound: true);
         m_gameplay_move = m_gameplay.FindAction("move", throwIfNotFound: true);
         m_gameplay_look = m_gameplay.FindAction("look", throwIfNotFound: true);
+        // onHorse
+        m_onHorse = asset.FindActionMap("onHorse", throwIfNotFound: true);
+        m_onHorse_ride = m_onHorse.FindAction("ride", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,10 +315,60 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         }
     }
     public GameplayActions @gameplay => new GameplayActions(this);
+
+    // onHorse
+    private readonly InputActionMap m_onHorse;
+    private List<IOnHorseActions> m_OnHorseActionsCallbackInterfaces = new List<IOnHorseActions>();
+    private readonly InputAction m_onHorse_ride;
+    public struct OnHorseActions
+    {
+        private @SimpleControls m_Wrapper;
+        public OnHorseActions(@SimpleControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ride => m_Wrapper.m_onHorse_ride;
+        public InputActionMap Get() { return m_Wrapper.m_onHorse; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(OnHorseActions set) { return set.Get(); }
+        public void AddCallbacks(IOnHorseActions instance)
+        {
+            if (instance == null || m_Wrapper.m_OnHorseActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_OnHorseActionsCallbackInterfaces.Add(instance);
+            @ride.started += instance.OnRide;
+            @ride.performed += instance.OnRide;
+            @ride.canceled += instance.OnRide;
+        }
+
+        private void UnregisterCallbacks(IOnHorseActions instance)
+        {
+            @ride.started -= instance.OnRide;
+            @ride.performed -= instance.OnRide;
+            @ride.canceled -= instance.OnRide;
+        }
+
+        public void RemoveCallbacks(IOnHorseActions instance)
+        {
+            if (m_Wrapper.m_OnHorseActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IOnHorseActions instance)
+        {
+            foreach (var item in m_Wrapper.m_OnHorseActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_OnHorseActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public OnHorseActions @onHorse => new OnHorseActions(this);
     public interface IGameplayActions
     {
         void OnFire(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+    }
+    public interface IOnHorseActions
+    {
+        void OnRide(InputAction.CallbackContext context);
     }
 }
