@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = new SimpleControls();
         gameplayActions = playerInput.gameplay;
-
+        playerLocomotion = GetComponent<PlayerLocomotion>();
         //callback to context
         
     }
