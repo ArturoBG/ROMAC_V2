@@ -6,7 +6,7 @@
             "id": "265c38f5-dd18-4d34-b198-aec58e1627ff",
             "actions": [
                 {
-                    "name": "fire",
+                    "name": "attack",
                     "type": "Button",
                     "id": "1077f913-a9f9-41b1-acb3-b9ee0adbc744",
                     "expectedControlType": "Button",
@@ -31,17 +31,37 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "secondaryAttack",
+                    "type": "Button",
+                    "id": "3398cc4e-5064-4d1b-b584-92fa41f91787",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "abb776f3-f329-4f7b-bbf8-b577d13be018",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "281b9f04-e9d9-4434-a3ee-f918f4323eb7",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "fire",
+                    "action": "attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -130,6 +150,17 @@
                     "processors": "ScaleVector2(x=2,y=2)",
                     "groups": "",
                     "action": "look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8abdbec-d86b-40b3-98c3-36b01abddd2d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "secondaryAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

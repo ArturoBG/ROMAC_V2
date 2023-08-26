@@ -28,7 +28,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             ""id"": ""265c38f5-dd18-4d34-b198-aec58e1627ff"",
             ""actions"": [
                 {
-                    ""name"": ""fire"",
+                    ""name"": ""attack"",
                     ""type"": ""Button"",
                     ""id"": ""1077f913-a9f9-41b1-acb3-b9ee0adbc744"",
                     ""expectedControlType"": ""Button"",
@@ -53,17 +53,37 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""secondaryAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""3398cc4e-5064-4d1b-b584-92fa41f91787"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""abb776f3-f329-4f7b-bbf8-b577d13be018"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""281b9f04-e9d9-4434-a3ee-f918f4323eb7"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""fire"",
+                    ""action"": ""attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -154,6 +174,17 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""action"": ""look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8abdbec-d86b-40b3-98c3-36b01abddd2d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""secondaryAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -190,9 +221,10 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
 }");
         // gameplay
         m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
-        m_gameplay_fire = m_gameplay.FindAction("fire", throwIfNotFound: true);
+        m_gameplay_attack = m_gameplay.FindAction("attack", throwIfNotFound: true);
         m_gameplay_move = m_gameplay.FindAction("move", throwIfNotFound: true);
         m_gameplay_look = m_gameplay.FindAction("look", throwIfNotFound: true);
+        m_gameplay_secondaryAttack = m_gameplay.FindAction("secondaryAttack", throwIfNotFound: true);
         // onHorse
         m_onHorse = asset.FindActionMap("onHorse", throwIfNotFound: true);
         m_onHorse_ride = m_onHorse.FindAction("ride", throwIfNotFound: true);
@@ -257,16 +289,18 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
     // gameplay
     private readonly InputActionMap m_gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_gameplay_fire;
+    private readonly InputAction m_gameplay_attack;
     private readonly InputAction m_gameplay_move;
     private readonly InputAction m_gameplay_look;
+    private readonly InputAction m_gameplay_secondaryAttack;
     public struct GameplayActions
     {
         private @SimpleControls m_Wrapper;
         public GameplayActions(@SimpleControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @fire => m_Wrapper.m_gameplay_fire;
+        public InputAction @attack => m_Wrapper.m_gameplay_attack;
         public InputAction @move => m_Wrapper.m_gameplay_move;
         public InputAction @look => m_Wrapper.m_gameplay_look;
+        public InputAction @secondaryAttack => m_Wrapper.m_gameplay_secondaryAttack;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -276,28 +310,34 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
-            @fire.started += instance.OnFire;
-            @fire.performed += instance.OnFire;
-            @fire.canceled += instance.OnFire;
+            @attack.started += instance.OnAttack;
+            @attack.performed += instance.OnAttack;
+            @attack.canceled += instance.OnAttack;
             @move.started += instance.OnMove;
             @move.performed += instance.OnMove;
             @move.canceled += instance.OnMove;
             @look.started += instance.OnLook;
             @look.performed += instance.OnLook;
             @look.canceled += instance.OnLook;
+            @secondaryAttack.started += instance.OnSecondaryAttack;
+            @secondaryAttack.performed += instance.OnSecondaryAttack;
+            @secondaryAttack.canceled += instance.OnSecondaryAttack;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
         {
-            @fire.started -= instance.OnFire;
-            @fire.performed -= instance.OnFire;
-            @fire.canceled -= instance.OnFire;
+            @attack.started -= instance.OnAttack;
+            @attack.performed -= instance.OnAttack;
+            @attack.canceled -= instance.OnAttack;
             @move.started -= instance.OnMove;
             @move.performed -= instance.OnMove;
             @move.canceled -= instance.OnMove;
             @look.started -= instance.OnLook;
             @look.performed -= instance.OnLook;
             @look.canceled -= instance.OnLook;
+            @secondaryAttack.started -= instance.OnSecondaryAttack;
+            @secondaryAttack.performed -= instance.OnSecondaryAttack;
+            @secondaryAttack.canceled -= instance.OnSecondaryAttack;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -363,9 +403,10 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
     public OnHorseActions @onHorse => new OnHorseActions(this);
     public interface IGameplayActions
     {
-        void OnFire(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnSecondaryAttack(InputAction.CallbackContext context);
     }
     public interface IOnHorseActions
     {

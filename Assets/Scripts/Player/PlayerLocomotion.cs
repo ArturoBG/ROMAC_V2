@@ -61,4 +61,17 @@ public class PlayerLocomotion : MonoBehaviour
         playerAnimator.SetFloat("MoveX", currentAnimationBlend.x);
     }
 
+    public void Jump()
+    {
+
+    }
+
+    public void Attack()
+    {
+        Debug.Log("Attack with weapon");
+        //TODO bug: spawning left click, wont let swordattack animation finish
+        //sword attack animation doesnt interpolate with walking blend tree
+        playerAnimator.SetTrigger("swordAttack");
+    }
+
 }

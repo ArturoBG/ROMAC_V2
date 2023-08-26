@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         gameplayActions = playerInput.gameplay;
         playerLocomotion = GetComponent<PlayerLocomotion>();
         //callback to context
-        
+        gameplayActions.attack.performed += ctx => playerLocomotion.Attack();
     }
 
     private void Update()
