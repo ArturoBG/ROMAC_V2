@@ -62,6 +62,15 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""46b9a214-5772-4cff-8799-eb31ffcd9223"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -185,6 +194,28 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
                     ""action"": ""secondaryAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b9a7df20-ffd7-445b-bd92-b2ce964cb182"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1f6bda1-ded4-423a-add0-85a52cf3c1ff"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -225,6 +256,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         m_gameplay_move = m_gameplay.FindAction("move", throwIfNotFound: true);
         m_gameplay_look = m_gameplay.FindAction("look", throwIfNotFound: true);
         m_gameplay_secondaryAttack = m_gameplay.FindAction("secondaryAttack", throwIfNotFound: true);
+        m_gameplay_jump = m_gameplay.FindAction("jump", throwIfNotFound: true);
         // onHorse
         m_onHorse = asset.FindActionMap("onHorse", throwIfNotFound: true);
         m_onHorse_ride = m_onHorse.FindAction("ride", throwIfNotFound: true);
@@ -293,6 +325,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_move;
     private readonly InputAction m_gameplay_look;
     private readonly InputAction m_gameplay_secondaryAttack;
+    private readonly InputAction m_gameplay_jump;
     public struct GameplayActions
     {
         private @SimpleControls m_Wrapper;
@@ -301,6 +334,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         public InputAction @move => m_Wrapper.m_gameplay_move;
         public InputAction @look => m_Wrapper.m_gameplay_look;
         public InputAction @secondaryAttack => m_Wrapper.m_gameplay_secondaryAttack;
+        public InputAction @jump => m_Wrapper.m_gameplay_jump;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -322,6 +356,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @secondaryAttack.started += instance.OnSecondaryAttack;
             @secondaryAttack.performed += instance.OnSecondaryAttack;
             @secondaryAttack.canceled += instance.OnSecondaryAttack;
+            @jump.started += instance.OnJump;
+            @jump.performed += instance.OnJump;
+            @jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -338,6 +375,9 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
             @secondaryAttack.started -= instance.OnSecondaryAttack;
             @secondaryAttack.performed -= instance.OnSecondaryAttack;
             @secondaryAttack.canceled -= instance.OnSecondaryAttack;
+            @jump.started -= instance.OnJump;
+            @jump.performed -= instance.OnJump;
+            @jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -407,6 +447,7 @@ public partial class @SimpleControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnSecondaryAttack(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IOnHorseActions
     {

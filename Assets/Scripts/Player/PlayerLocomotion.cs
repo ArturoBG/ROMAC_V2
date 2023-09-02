@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
+using UnityEngine.Video;
 
 public class PlayerLocomotion : MonoBehaviour
 {
     [SerializeField]
-    private Vector3 playerVelocity;
+    private Vector3 playerVelocity = new Vector3();
 
     [SerializeField]
     private float defaultSpeed = 5f;
@@ -39,6 +42,15 @@ public class PlayerLocomotion : MonoBehaviour
         characterController = GetComponent<CharacterController>();
     }
 
+    private void Update()
+    {
+        isGrounded = characterController.isGrounded;
+        if (!isGrounded)
+        {
+            //is midair
+        }
+    }
+
     public void MoveCharacter(Vector2 input)
     {
        // Debug.Log("Input {"+input.x + "}. {"+ input.y+"}");
@@ -59,19 +71,49 @@ public class PlayerLocomotion : MonoBehaviour
 
         playerAnimator.SetFloat("MoveZ", currentAnimationBlend.y);
         playerAnimator.SetFloat("MoveX", currentAnimationBlend.x);
+
+        playerVelocity.y += gravity * Time.deltaTime;
+        characterController.Move(playerVelocity * Time.deltaTime);
+
+        if (isGrounded && playerVelocity.y < 0)
+        {
+            playerVelocity.y = -1f;
+        }
     }
 
     public void Jump()
-    {
-
+    {      
+        if (isGrounded)
+        {
+            float jumpForce = Mathf.Abs(jumpingHeight * gravity);
+            playerVelocity.y = jumpForce;
+            //animator=> jump animation
+        }
     }
 
     public void Attack()
     {
         Debug.Log("Attack with weapon");
-        //TODO bug: spawning left click, wont let swordattack animation finish
-        //sword attack animation doesnt interpolate with walking blend tree
+        //TODO temporizador para ataque rapido o lento
         playerAnimator.SetTrigger("swordAttack");
+    }
+
+    /// <summary>
+    ///  Shield se levante con bool en true y baje con bool en false
+    ///  TODO
+    /// </summary>
+    public void Shield(bool raise)
+    {
+        //TODO bug: walk animation se entromete en shield animation, 
+        //animation rigging para siempre ver hacia delante
+        if (raise)
+        {
+            playerAnimator.SetBool("shield", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("shield", false);
+        }
     }
 
 }

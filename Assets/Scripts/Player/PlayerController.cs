@@ -18,7 +18,15 @@ public class PlayerController : MonoBehaviour
         gameplayActions = playerInput.gameplay;
         playerLocomotion = GetComponent<PlayerLocomotion>();
         //callback to context
+        //attack left hand 
         gameplayActions.attack.performed += ctx => playerLocomotion.Attack();
+
+        //attack/shield right hand
+        gameplayActions.secondaryAttack.performed += ctx => playerLocomotion.Shield(true);
+        gameplayActions.secondaryAttack.canceled += ctx => playerLocomotion.Shield(false);
+
+        //jump
+        gameplayActions.jump.performed += ctx => playerLocomotion.Jump();
     }
 
     private void Update()
