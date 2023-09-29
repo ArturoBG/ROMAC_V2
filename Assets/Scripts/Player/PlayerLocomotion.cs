@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
-using UnityEngine.Video;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerLocomotion : MonoBehaviour
 {
@@ -28,7 +24,6 @@ public class PlayerLocomotion : MonoBehaviour
 
     private CharacterController characterController;
 
-    [SerializeField]
     private Animator playerAnimator;
 
     private Vector2 currentAnimationBlend;
@@ -36,6 +31,15 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private float animationSmoothFactor = 0.1f;
 
+    [Header("Shield and Sword Constraints")]
+    [SerializeField]
+    MultiAimConstraint shieldShoulderConstraint; 
+    [SerializeField]
+    MultiAimConstraint swordhoulderConstraint;
+    [SerializeField]
+    AnimationClip swordClip;
+    [SerializeField]
+    RigBuilder rig;
     private void Awake()
     {
         playerAnimator = GetComponent<Animator>();
@@ -93,9 +97,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log("Attack with weapon");
-        //TODO temporizador para ataque rapido o lento
-        playerAnimator.SetTrigger("swordAttack");
+        StartCoroutine(swordAttackRoutine());
     }
 
     /// <summary>
@@ -109,11 +111,21 @@ public class PlayerLocomotion : MonoBehaviour
         if (raise)
         {
             playerAnimator.SetBool("shield", true);
+            shieldShoulderConstraint.data.offset = new Vector3(30f,57f,6.4f);
         }
         else
         {
             playerAnimator.SetBool("shield", false);
+            shieldShoulderConstraint.data.offset = new Vector3(0, 0, 0);
         }
     }
 
+    IEnumerator swordAttackRoutine()
+    {
+        Debug.Log("Attack with weapon");
+        playerAnimator.SetTrigger("swordAttack");
+        swordhoulderConstraint.data.offset = new Vector3(6.2f, 90f, 23.5f);
+        yield return new WaitForSeconds(swordClip.length);
+        swordhoulderConstraint.data.offset = new Vector3(0f, 0f, 0f);
+    }
 }

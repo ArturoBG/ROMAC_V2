@@ -7,7 +7,7 @@ AvatarMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: KnightUpperBody
-  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Mask: 00000000000000000000000000000000000000000100000001000000010000000100000000000000000000000100000001000000
   m_Elements:
   - m_Path: 
     m_Weight: 1
@@ -143,19 +143,19 @@ AvatarMask:
       1/Thumb_02 1/Thumb_03 1
     m_Weight: 1
   - m_Path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/Eyebrows
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/Eyes
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/SM_Item_Goblin_Hair
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/SM_Item_Mask_01
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root/Hips/Spine_01/Spine_02/Spine_03/Neck/Head/SM_Item_Mask_02
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Root/Hips/UpperLeg_L
     m_Weight: 1
   - m_Path: Root/Hips/UpperLeg_L/LowerLeg_L

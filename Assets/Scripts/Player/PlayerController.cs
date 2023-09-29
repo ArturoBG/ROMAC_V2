@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +9,8 @@ public class PlayerController : MonoBehaviour
     //reference to scripts
     public PlayerLocomotion playerLocomotion;
     public PlayerCamera playerCamera;
+
+    private bool IsEnabled = true;
 
     private void Awake()
     {
@@ -32,6 +32,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         playerLocomotion.MoveCharacter(gameplayActions.move.ReadValue<Vector2>());
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            playerLocomotion.enabled = !IsEnabled;
+           
+        }
     }
 
     private void LateUpdate()
