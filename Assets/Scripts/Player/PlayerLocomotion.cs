@@ -93,7 +93,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void Attack()
     {
-        Debug.Log("Attack with weapon");
+        //Debug.Log("Attack with weapon");
         //TODO temporizador para ataque rapido o lento
         playerAnimator.SetTrigger("swordAttack");
     }

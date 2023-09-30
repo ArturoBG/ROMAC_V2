@@ -1,17 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerCamera : MonoBehaviour
-{
-    [SerializeField] private Camera MainCamera;
 
+{
+    [SerializeField] private CinemachineVirtualCamera MainCamera;
+
+    [Header("FirsPersonCamera")]
     [SerializeField]
     private float xRotation;
 
-    [SerializeField] 
+    [SerializeField]
     private float ySensitivity = 1f;
-    [SerializeField] 
+
+    [SerializeField]
     private float xSensitivity = 1f;
 
     [SerializeField]
@@ -20,7 +23,17 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField]
     private float maxX = 60f;
 
+    [Header("ThirdPersonCamera")]
+    public Transform followTarget;
+    public float horizontalTurnSpeed = 1f;
+    public float verticalTurnSpeed = 1f;
+
     public void ProcessLook(Vector2 input)
+    {
+        ThirdPersonCamera(input);
+    }
+
+    public void FirstPersonCamera(Vector2 input)
     {
         //Debug.Log("Camera {" + input.x + "}. {" + input.y + "}");
         float mouseX = input.x;
@@ -29,8 +42,29 @@ public class PlayerCamera : MonoBehaviour
         xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
         xRotation = Mathf.Clamp(xRotation, minX, maxX);
 
-        MainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0,0);
+        MainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
-        
+    }
+
+    public void ThirdPersonCamera(Vector2 input)
+    {
+        var rotInput = new Vector2(input.x, input.y);
+        var rot = transform.eulerAngles;
+        rot.y += rotInput.x * horizontalTurnSpeed;
+
+        transform.rotation = Quaternion.Euler(rot);
+
+        if (followTarget != null)
+        {
+            rot = followTarget.localRotation.eulerAngles;
+            rot.x -= rotInput.y * verticalTurnSpeed;
+            if (rot.x > 180)
+            {
+                rot.x -= 360;
+            }
+            rot.x = Mathf.Clamp(rot.x, minX, maxX);
+            followTarget.localRotation = Quaternion.Euler(rot);
+        }       
+
     }
 }
