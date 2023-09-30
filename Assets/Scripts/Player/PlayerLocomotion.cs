@@ -122,10 +122,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     IEnumerator swordAttackRoutine()
     {
-        Debug.Log("Attack with weapon");
         playerAnimator.SetTrigger("swordAttack");
-        swordhoulderConstraint.data.offset = new Vector3(6.2f, 90f, 23.5f);
         yield return new WaitForSeconds(swordClip.length);
-        swordhoulderConstraint.data.offset = new Vector3(0f, 0f, 0f);
     }
 }
