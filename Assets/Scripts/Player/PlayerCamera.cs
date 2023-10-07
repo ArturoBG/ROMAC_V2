@@ -1,9 +1,7 @@
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class PlayerCamera : MonoBehaviour
-
 {
     [SerializeField] private CinemachineVirtualCamera MainCamera;
 
@@ -27,6 +25,11 @@ public class PlayerCamera : MonoBehaviour
     public Transform followTarget;
     public float horizontalTurnSpeed = 1f;
     public float verticalTurnSpeed = 1f;
+
+    private void Start()
+    {
+        
+    }
 
     public void ProcessLook(Vector2 input)
     {
