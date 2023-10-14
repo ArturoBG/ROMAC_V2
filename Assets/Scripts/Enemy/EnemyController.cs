@@ -10,16 +10,15 @@ public class EnemyController : MonoBehaviour
         healthComponent.ResetHealth();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        if (other.tag.Equals("weapons"))
         {
-            healthComponent.TakeDamage(20);
+            Debug.Log(this.name + "Trigger Entered " + other.name);
+            int damageReceived = other.GetComponent<WeaponScript>().damage;
+            healthComponent.TakeDamage(damageReceived);            
         }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            healthComponent.HealUp(10);
-        }
+        
     }
+
 }

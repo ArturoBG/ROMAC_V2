@@ -24,6 +24,14 @@ public class HealthScript : MonoBehaviour
     [SerializeField]
     private Color critHealth;
 
+    public float threeQuartersHealth;
+
+    private void Start()
+    {
+        ResetHealth();
+        //regla de tres
+        //definir 75%, 50%, 25%
+    }
 
     public void TakeDamage(int damage)
     {
@@ -33,7 +41,7 @@ public class HealthScript : MonoBehaviour
         {
             totalHealth = characterHealth;
         }
-
+        CheckColor();
     }
 
     public void HealUp(int value)
@@ -44,6 +52,7 @@ public class HealthScript : MonoBehaviour
         {
             totalHealth = characterHealth;
         }
+        CheckColor();
     }
 
     public void ResetHealth()
@@ -51,9 +60,24 @@ public class HealthScript : MonoBehaviour
         totalHealth = characterHealth;        
         healthBar.maxValue = characterHealth;
         healthBar.value = characterHealth;
+        fillBar.color = maxHealth;
     }
 
-
-
+    private void CheckColor()
+    {
+        //basandonos en que el personaje tiene 100HP
+        if (healthBar.value >= 75)//75%
+        {
+            fillBar.color = maxHealth;
+        }
+        else if (healthBar.value >= 50 && healthBar.value <= 74)
+        {
+            fillBar.color = midHealth;
+        }
+        else if (healthBar.value > 0 && healthBar.value <= 49)
+        {
+            fillBar.color = critHealth;
+        }
+    }
 }
 

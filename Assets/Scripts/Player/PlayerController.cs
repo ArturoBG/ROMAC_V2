@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     //reference to scripts
     public PlayerLocomotion playerLocomotion;
     public PlayerCamera playerCamera;
-
+    public HealthScript healthScript;
     private void Awake()
     {
         playerInput = new SimpleControls();

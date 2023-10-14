@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera MainCamera;
+    [Tooltip("PLAYER->ThirdPersonCamera. Virtual Cam que sigue al personaje")]
+    [SerializeField] private CinemachineVirtualCamera TPC;
 
     [Header("FirsPersonCamera")]
     [SerializeField]
@@ -45,7 +46,7 @@ public class PlayerCamera : MonoBehaviour
         xRotation -= (mouseY * Time.deltaTime) * ySensitivity;
         xRotation = Mathf.Clamp(xRotation, minX, maxX);
 
-        MainCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        TPC.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
     }
 
