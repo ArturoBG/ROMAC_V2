@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerWeapons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public WeaponScript[] weapons;
+
+    public void TurnOnWeapon()
     {
-        
+        weapons[0].TurnOnCollider();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TurnOffWeapon()
     {
-        
+        weapons[0].TurnOffCollider();
     }
 }

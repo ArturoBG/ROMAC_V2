@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
         gameplayActions.jump.performed += ctx => playerLocomotion.Jump();
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         playerLocomotion.MoveCharacter(gameplayActions.move.ReadValue<Vector2>());

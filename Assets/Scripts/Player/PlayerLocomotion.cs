@@ -25,6 +25,9 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private Animator playerAnimator;
 
+    [SerializeField]
+    private HealthScript healthComponent;
+
     private Vector2 currentAnimationBlend;
     private Vector2 animationVelocity;
     [SerializeField]
@@ -33,6 +36,7 @@ public class PlayerLocomotion : MonoBehaviour
     private void Awake()
     {
         playerAnimator = GetComponent<Animator>();
+        healthComponent = GetComponent<HealthScript>();
         characterController = GetComponent<CharacterController>();
     }
 
@@ -107,6 +111,16 @@ public class PlayerLocomotion : MonoBehaviour
         else
         {
             playerAnimator.SetBool("shield", false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("weapons"))
+        {
+            Debug.Log(this.name + "Trigger Entered " + other.name);
+            int damageReceived = other.GetComponent<WeaponScript>().damage;
+            healthComponent.TakeDamage(damageReceived);
         }
     }
 

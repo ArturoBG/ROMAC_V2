@@ -1504,6 +1504,9 @@ GameObject:
   - component: {fileID: 9086732329454323985}
   - component: {fileID: 6870744837225746794}
   - component: {fileID: 4741321688646143522}
+  - component: {fileID: 5757659482598718345}
+  - component: {fileID: 7571932622920071264}
+  - component: {fileID: 4126379357856531579}
   m_Layer: 6
   m_Name: OrkEnemy
   m_TagString: Untagged
@@ -1518,7 +1521,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3515813088660879646}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: -0.00000035762784}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 2.77, y: 0, z: 8.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1564,6 +1567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c00a4b6fa6e5346821d01973c21513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 4743794149776177976}
 --- !u!114 &9086732329454323985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1580,8 +1585,8 @@ MonoBehaviour:
   fillBar: {fileID: 110886780088352442}
   characterHealth: 100
   totalHealth: 0
-  maxHealth: {r: 0.12400607, g: 0.23320897, b: 0.8962264, a: 1}
-  midHealth: {r: 0.13725492, g: 0.73633426, b: 0.99215686, a: 1}
+  maxHealth: {r: 0.3357329, g: 0.990566, b: 0, a: 1}
+  midHealth: {r: 1, g: 0.74779475, b: 0, a: 1}
   critHealth: {r: 1, g: 0.043137256, b: 0, a: 1}
   threeQuartersHealth: 0
 --- !u!114 &6870744837225746794
@@ -1681,6 +1686,70 @@ MonoBehaviour:
   - {fileID: 959530448370671655}
   - {fileID: 2673648883844795021}
   - {fileID: 1713705631334611258}
+--- !u!114 &5757659482598718345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515813088660879646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4d25976230bd84998541a4b9a08f7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 75
+  speed: 2
+  timerOfDamage: 5
+  IsDamageReceived: 0
+--- !u!65 &7571932622920071264
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515813088660879646}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3838238, y: 1.678293, z: 0.30921543}
+  m_Center: {x: 0.018134683, y: 0.91414654, z: -0.028401345}
+--- !u!54 &4126379357856531579
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515813088660879646}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3649123688260930573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3326,7 +3395,7 @@ GameObject:
   - component: {fileID: 2732553611076573406}
   - component: {fileID: 3260455119885890414}
   m_Layer: 6
-  m_Name: Character_Hero_Knight_Female
+  m_Name: goblinWarrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3392,7 +3461,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300048, guid: b69174d668ba02d44b14a084b217670a, type: 3}
+  m_Mesh: {fileID: 4300066, guid: b69174d668ba02d44b14a084b217670a, type: 3}
   m_Bones:
   - {fileID: 9102541631289888682}
   - {fileID: 7980669184677561071}
@@ -3841,7 +3910,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 119060, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
       propertyPath: m_Name
-      value: SM_Wep_Ornate_Sword_01
+      value: Mace_Spikes
       objectReference: {fileID: 0}
     - target: {fileID: 119060, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
       propertyPath: m_Layer
@@ -3907,16 +3976,67 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 3366204, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 368c05d6b0f107f42970f6fbca1d7e06, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 119060, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1663367479565507026}
+    - targetCorrespondingSourceObject: {fileID: 119060, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4743794149776177976}
   m_SourcePrefab: {fileID: 100100000, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
 --- !u!4 &1428643642856940208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 473066, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
   m_PrefabInstance: {fileID: 1428643642857002330}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1428643642857047118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 119060, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
+  m_PrefabInstance: {fileID: 1428643642857002330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1663367479565507026
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428643642857047118}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.2020712
+  m_Center: {x: -0.052071877, y: 0.6, z: 0}
+--- !u!114 &4743794149776177976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428643642857047118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea799a97cae3445439b19efbddc15249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Mace Spikes
+  damage: 20
+  col: {fileID: 0}
 --- !u!1001 &8107747394388986450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3993,6 +4113,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 181.948
       objectReference: {fileID: 0}
+    - target: {fileID: 3332968, guid: 12d8a1596807fc546b7d9ecfb4336e7f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 18a0e475bb9a67a4ead91cfc54c60067, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

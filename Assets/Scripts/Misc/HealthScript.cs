@@ -26,11 +26,9 @@ public class HealthScript : MonoBehaviour
 
     public float threeQuartersHealth;
 
-    private void Start()
+    public void SetTotalHealth(int value)
     {
-        ResetHealth();
-        //regla de tres
-        //definir 75%, 50%, 25%
+        totalHealth = value;
     }
 
     public void TakeDamage(int damage)
@@ -55,7 +53,7 @@ public class HealthScript : MonoBehaviour
         CheckColor();
     }
 
-    public void ResetHealth()
+    public void InitHealth()
     {
         totalHealth = characterHealth;        
         healthBar.maxValue = characterHealth;
