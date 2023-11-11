@@ -59,7 +59,7 @@ public class EnemyController : MonoBehaviour
     {
         //Debug.Log("Sword did damage");
         IsDamageReceived = true;
-        int damageReceived = other.GetComponent<WeaponScript>().damage;
+        int damageReceived = other.GetComponent<WeaponScript>().weaponDamage;
         healthComponent.TakeDamage(damageReceived);
         enemyMovement.animator.SetTrigger("damage");
         yield return new WaitForSeconds(timerOfDamage);

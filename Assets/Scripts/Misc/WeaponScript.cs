@@ -2,25 +2,23 @@ using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
 {
-    public string weaponName;
-    public int damage;
+    public int weaponDamage;
+
     [SerializeField]
-    private Collider col;
+    private BoxCollider collider;
 
     private void Start()
     {
-        col = GetComponent<Collider>();
-        //col.isTrigger = false;
+        collider.enabled = false;
     }
 
-    public void TurnOnCollider()
+    public void turnOnCollider()
     {
-        Debug.Log("TUrn on collider ");
-        col.isTrigger = true;
+        collider.enabled = true;
     }
 
-    public void TurnOffCollider()
+    public void turnOffCollider()
     {
-        col.isTrigger = false;
+        collider.enabled = false;
     }
 }

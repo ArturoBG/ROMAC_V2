@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,23 +5,25 @@ public class EnemyMovement : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform playerTransform = null;
+    public GoalScript goalTransform = null;
     public EnemyCombat enemyCombat;
     public Animator animator;
     public Transform ballEffectorGO;
     private Vector3 ballEffectorOriginalPosition = Vector3.zero;
-    private Vector2 currentAnimationBlend;
-    private Vector2 animationVelocity;
     Vector3 localDirection;
     public bool IsWalking = false;
     [SerializeField]
     private float animationSmoothFactor = 0.1f;
+
     private void Start()
     {
+        goalTransform = FindObjectOfType<GoalScript>();
         ballEffectorOriginalPosition = ballEffectorGO.transform.localPosition;
     }
 
     private void Update()
     {
+        //When player is at range
         if (IsWalking && playerTransform != null)//enemy within collider
         {
             MoveAgent(playerTransform);
@@ -31,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 animator.SetTrigger("attack");
                 ballEffectorGO.position = new Vector3(playerTransform.position.x, playerTransform.position.y + 1.7f, playerTransform.position.z);
-                
+                //
             }
             else
             {
@@ -39,10 +39,16 @@ public class EnemyMovement : MonoBehaviour
             }
 
         }
-        else
+        else //we lost the player but we have a GOALScript
         {
-           StopAgentMovement();
+            //StopAgentMovement();
+            MoveAgent(goalTransform.transform);
+            //Detect enemy in proximity and see if he is attacking
+            //if he is attacking, stop!
+            //if no one is attacking, attack!
         }
+        //we lost the player and we dont have a GOalScript
+        //...
     }
 
     public void MoveAgent(Transform player)

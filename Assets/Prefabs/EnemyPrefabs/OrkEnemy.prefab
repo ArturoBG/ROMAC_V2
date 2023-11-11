@@ -930,7 +930,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 1.3
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &2305392019145742996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1601,8 +1601,9 @@ Transform:
   - {fileID: 7689973873671415443}
   - {fileID: 5786258804904947720}
   - {fileID: 2655111967694972775}
+  - {fileID: 1767855852980813524}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &11998148641990881
 Animator:
@@ -1637,7 +1638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c00a4b6fa6e5346821d01973c21513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
+  weapon:
   - {fileID: 4743794149776177976}
 --- !u!114 &9086732329454323985
 MonoBehaviour:
@@ -1837,7 +1838,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3515813088660879646}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.4
+  m_Radius: 1.67
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1848,7 +1849,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1.75
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!1 &3649123688260930573
 GameObject:
@@ -3864,6 +3865,54 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
+--- !u!1 &8089152118954156076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1767855852980813524}
+  - component: {fileID: 5145091685698419308}
+  m_Layer: 6
+  m_Name: EnemyObstacle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1767855852980813524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8089152118954156076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3080906297224605960}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &5145091685698419308
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8089152118954156076}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 0.5, z: 2.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.7, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8109383604172649558
 GameObject:
   m_ObjectHideFlags: 0
@@ -4159,10 +4208,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 119060, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1663367479565507026}
+      addedObject: {fileID: 4743794149776177976}
     - targetCorrespondingSourceObject: {fileID: 119060, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4743794149776177976}
+      addedObject: {fileID: 6071672210834828200}
   m_SourcePrefab: {fileID: 100100000, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
 --- !u!4 &1428643642856940208 stripped
 Transform:
@@ -4174,8 +4223,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 119060, guid: c17b117a7e676e148b2ee325c1e6041d, type: 3}
   m_PrefabInstance: {fileID: 1428643642857002330}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &1663367479565507026
-SphereCollider:
+--- !u!114 &4743794149776177976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428643642857047118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea799a97cae3445439b19efbddc15249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponDamage: 15
+  collider: {fileID: 6071672210834828200}
+--- !u!65 &6071672210834828200
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4193,23 +4256,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.2020712
-  m_Center: {x: -0.052071877, y: 0.6, z: 0}
---- !u!114 &4743794149776177976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428643642857047118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea799a97cae3445439b19efbddc15249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: Mace Spikes
-  damage: 20
-  col: {fileID: 0}
+  m_Size: {x: 0.50141007, y: 1.0131037, z: 0.4336977}
+  m_Center: {x: -0.000000755988, y: 0.3460046, z: 0.00000023715691}
 --- !u!1001 &8107747394388986450
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWeapons : MonoBehaviour
 {
-    public WeaponScript[] weapons;
+    public WeaponScript[] weapon;
 
     public void TurnOnWeapon()
     {
-        weapons[0].TurnOnCollider();
+        weapon[0].turnOnCollider();
     }
 
     public void TurnOffWeapon()
     {
-        weapons[0].TurnOffCollider();
+        weapon[0].turnOffCollider();
     }
 }

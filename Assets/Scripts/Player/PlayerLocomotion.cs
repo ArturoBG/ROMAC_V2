@@ -119,7 +119,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (other.tag.Equals("weapons"))
         {
             Debug.Log(this.name + "Trigger Entered " + other.name);
-            int damageReceived = other.GetComponent<WeaponScript>().damage;
+            int damageReceived = other.GetComponent<WeaponScript>().weaponDamage;
             healthComponent.TakeDamage(damageReceived);
         }
     }
